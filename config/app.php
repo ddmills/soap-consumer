@@ -156,6 +156,10 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /*
+        * Third-party Service Providers...
+        */
+        'Artisaninweb\SoapWrapper\ServiceProvider',
     ],
 
     /*
@@ -201,6 +205,7 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
+        'SoapWrapper' => 'Artisaninweb\SoapWrapper\Facades\SoapWrapper',
 
     ],
 
