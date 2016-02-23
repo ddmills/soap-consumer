@@ -10,7 +10,7 @@ use Artisaninweb\SoapWrapper\Facades\SoapWrapper;
 
 class OrderController extends Controller
 {
-    public function index()
+    public function __construct()
     {
         SoapWrapper::add(function($service) {
             $service
@@ -19,13 +19,52 @@ class OrderController extends Controller
                 ->cache(WSDL_CACHE_NONE)
                 ->trace(true);
         });
+    }
 
-        $functions = [];
-
-        SoapWrapper::service(env('SOAP_SERVICE_NAME'), function($service) use(&$functions) {
-            $functions = $service->getFunctions();
+    protected function getSoapService()
+    {
+        $serviceRef = null;
+        SoapWrapper::service(env('SOAP_SERVICE_NAME'), function($service) use(&$serviceRef) {
+            $serviceRef = $service;
         });
 
-        dd($functions);
+        $loginParams = [
+            'name' => env('SOAP_USERNAME'),
+            'password' => env('SOAP_PASSWORD'),
+        ];
+
+        $serviceRef->call('Login', [$loginParams]);
+        return $serviceRef;
+    }
+
+    public function index()
+    {
+        $service = $this->getSoapService();
+
+        $params = [
+            'commands' => [
+                [
+                    'FieldName' => 'Dynamic',
+                ],
+            ],
+            'filters' => [],
+            'topCount' => 3,
+            'includeHeaders' => true,
+            'breakOnError' => true,
+        ];
+
+        // dd($service->call('GI000002Submit', []));
+        // dd($service->call('SO301000GetSchema', []));
+        dd($service->call('GI000002GetSchema', []));
+        // dd($service->call('GI000002Submit', []));
+        // dd($service->call('GI000002Export', [$params])->ExportResult->ArrayOfString);
+
+        return view('order.index');
+    }
+
+    public function actions()
+    {
+        $functions = $this->getSoapService()->getFunctions();
+        return view('order.actions', compact('functions'));
     }
 }

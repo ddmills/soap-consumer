@@ -28,4 +28,5 @@ Route::get('/', function () {
 
 Route::group(['middleware' => ['web']], function () {
     Route::get('/order', ['as' => 'order.index', 'uses' => 'OrderController@index']);
+    Route::get('/order/actions', ['as' => 'order.actions', 'uses' => 'OrderController@actions']);
 });
