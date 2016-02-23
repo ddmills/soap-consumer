@@ -7,39 +7,17 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                font-family: monospace,'Lato';
-                color: #444;
-            }
-
-            .container {
-                margin: 0 auto;
-                width: 400px;
-            }
-
-            .app-content {
-                padding: 32px 0;
-            }
-
-            .app-nav {
-                padding: 16px 0;
-                border-bottom: 1px dashed #444;
-            }
-
-        </style>
+        <!-- Bootstrap CDN -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
         <div class="container app-nav">
-            <a href='{{ route("order.index") }}'>Orders</a> &middot;
-            <a href='{{ route("order.actions") }}'>Actions</a> &middot;
+            <a href='{{ route("order.index") }}'>order.index</a> &middot;
+            <a href='{{ route("order.actions") }}'>order.actions</a> &middot;
+            <a href='{{ route("contact.index") }}'>contact.index</a> &middot;
+            <a href='{{ route("contact.actions") }}'>contact.actions</a> &middot;
             <a href='#'>Find Order</a>
         </div>
         <div class="container app-content">

@@ -29,4 +29,9 @@ Route::get('/', function () {
 Route::group(['middleware' => ['web']], function () {
     Route::get('/order', ['as' => 'order.index', 'uses' => 'OrderController@index']);
     Route::get('/order/actions', ['as' => 'order.actions', 'uses' => 'OrderController@actions']);
+
+    Route::get('/contact', ['as' => 'contact.index', 'uses' => 'ContactController@index']);
+    Route::get('/contact/actions', ['as' => 'contact.actions', 'uses' => 'ContactController@actions']);
+    Route::get('/contact/schema', ['as' => 'contact.schema', 'uses' => 'ContactController@schema']);
+
 });

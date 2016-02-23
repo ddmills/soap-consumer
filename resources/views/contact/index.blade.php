@@ -1,7 +1,6 @@
 @extends('master')
 @section('content')
-    <h1>Order Index</h1>
+    <h1>Contact Index</h1>
     <div class='container'>
-        {{ $response }}
     </div>
 @endsection
