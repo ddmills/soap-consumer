@@ -163,7 +163,8 @@ return [
         */
         App\Providers\ContactServiceProvider::class,
         App\Providers\ContactRepositoryServiceProvider::class,
-        'Artisaninweb\SoapWrapper\ServiceProvider',
+        App\Providers\AcumaticaClientServiceProvider::class,
+
     ],
 
     /*
