@@ -18,6 +18,7 @@
             <ul class="nav nav-tabs">
                 <li><a href='/'>home</a></li>
                 <li><a href='{{ route("contact.index") }}'>contact.index</a></li>
+                <li><a href='{{ route("salesOrder.index") }}'>salesOrder.index</a></li>
             </ul>
         </div>
         <div class="container app-content">
