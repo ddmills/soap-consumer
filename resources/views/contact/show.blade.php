@@ -6,9 +6,26 @@
             {{ var_dump($contact) }}
         </div>
         <div class="col-md-6">
-            <p><b>id</b>: {{ $contact->id }}</p>
-            <p><b>email</b>: {{ $contact->email }}</p>
-            <p><b>name</b>: {{ $contact->name }}</p>
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>{{ $contact->id }}</td>
+                        <td>{{ $contact->firstName }}</td>
+                        <td>{{ $contact->lastName }}</td>
+                        <td>{{ $contact->name }}</td>
+                        <td>{{ $contact->email }}</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 @endsection
