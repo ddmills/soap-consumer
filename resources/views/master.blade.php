@@ -13,12 +13,13 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     </head>
     <body>
-        <div class="container app-nav">
-            <a href='{{ route("order.index") }}'>order.index</a> &middot;
-            <a href='{{ route("order.actions") }}'>order.actions</a> &middot;
-            <a href='{{ route("contact.index") }}'>contact.index</a> &middot;
-            <a href='{{ route("contact.actions") }}'>contact.actions</a> &middot;
-            <a href='#'>Find Order</a>
+        <div class="container">
+            <h2> Soap test </h2>
+            <div class="btn-group">
+                <a class="btn btn-default" href='/'>home</a>
+                <a class="btn btn-default" href='{{ route("contact.index") }}'>contact.index</a>
+                <a class="btn btn-default" href='{{ route("contact.actions") }}'>contact.actions</a>
+            </div>
         </div>
         <div class="container app-content">
             @yield('content')

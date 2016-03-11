@@ -156,9 +156,13 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        App\Providers\RouteServiceProvider::class,
+
         /*
         * Third-party Service Providers...
         */
+        App\Providers\ContactServiceProvider::class,
+        App\Providers\ContactRepositoryServiceProvider::class,
         'Artisaninweb\SoapWrapper\ServiceProvider',
     ],
 

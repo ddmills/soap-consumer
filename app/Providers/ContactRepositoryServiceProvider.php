@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
-class ContactServiceProvider extends ServiceProvider
+class ContactRepositoryServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -23,6 +23,6 @@ class ContactServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('App/Services/ContactService', 'App/Services/ContactService');
+        $this->app->bind('App/Repositories/ContactRepository', 'App/Repositories/ContactRepository');
     }
 }

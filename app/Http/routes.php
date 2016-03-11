@@ -1,37 +1,12 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Routes File
-|--------------------------------------------------------------------------
-|
-| Here is where you will register all of the routes in an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| This route group applies the "web" middleware group to every route
-| it contains. The "web" middleware group is defined in your HTTP
-| kernel and includes session state, CSRF protection, and more.
-|
-*/
-
 Route::group(['middleware' => ['web']], function () {
-    Route::get('/order', ['as' => 'order.index', 'uses' => 'OrderController@index']);
-    Route::get('/order/actions', ['as' => 'order.actions', 'uses' => 'OrderController@actions']);
-
     Route::get('/contact', ['as' => 'contact.index', 'uses' => 'ContactController@index']);
+    Route::get('/contact/{contact}', ['as' => 'contact.show', 'uses' => 'ContactController@show']);
     Route::get('/contact/actions', ['as' => 'contact.actions', 'uses' => 'ContactController@actions']);
     Route::get('/contact/schema', ['as' => 'contact.schema', 'uses' => 'ContactController@schema']);
-
 });

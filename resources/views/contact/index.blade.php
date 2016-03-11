@@ -1,7 +1,9 @@
 @extends('master')
 @section('content')
     <h1>Contact Index</h1>
-    <table class="table table-striped">
+    {{ $contacts[0]->name }}
+    {{-- {{ dd($contacts) }} --}}
+    {{-- <table class="table table-striped">
         <thead>
             <tr>
                 <th>ID</th>
@@ -23,5 +25,5 @@
                 <td col="4">Sorry, No Contacts Found</td>
             </tr>
         @endforelse
-        </tbody>
+        </tbody> --}}
 @endsection

@@ -6,22 +6,27 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-use App\Repositories\ContactRepository as Contacts;
+use App\Services\ContactService;
 
 class ContactController extends Controller
 {
-    protected $contacts;
+    protected $contactService;
 
-    public function __construct(Contacts $contacts)
+    public function __construct(ContactService $contactService)
     {
-        $this->contacts = $contacts;
+        $this->contactService = $contactService;
     }
 
     public function index()
     {
-        return view('contact.index', [
-            'contacts' => $this->contacts->all()
-        ]);
+        $contacts = $this->contactService->all();
+        return view('contact.index', compact('contacts'));
+    }
+
+    public function show($id)
+    {
+        $contact = $this->contactService->find($id);
+        return view('contact.show', compact('contact'));
     }
 
     public function actions()
