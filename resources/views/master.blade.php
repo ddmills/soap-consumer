@@ -17,7 +17,8 @@
             <h2> Soap test </h2>
             <ul class="nav nav-tabs">
                 <li><a href='/'>home</a></li>
-                <li><a href='{{ route("contact.index") }}'>contact.index</a></li>
+                <li><a href='{{ route("contact.index") }}'>Contacts</a></li>
+                <li><a href='{{ route("salesOrder.index") }}'>Sales Orders</a></li>
             </ul>
         </div>
         <div class="container app-content">
