@@ -23,7 +23,7 @@ class AcumaticaClient extends SoapClient
     public function setup()
     {
         if (Cache::has('acumatica.cookies')) {
-            echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Acumatica cookie detected</div></div>');
+            echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-certificate"></span> Acumatica cookie detected</div></div>');
             $this->_cookies = Cache::get('acumatica.cookies');
             // $this->_cookies['ASP.NET_SessionId'][0] = 'invalid';
             // $this->_cookies['.ASPXAUTH'][0] = 'invalid';
@@ -34,16 +34,16 @@ class AcumaticaClient extends SoapClient
 
     function __call($request, $data)
     {
-        echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Sending an a request: ' . $request . '</div></div>');
+        echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-transfer"></span> Sending a request: ' . $request . '</div></div>');
 
         try {
             $response = parent::__call($request, $data);
             echo('<div class="alert alert-success"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Request success: ' . $request . '</div></div>');
             return $response;
         } catch (\SoapFault $e) {
-            echo('<div class="alert alert-danger"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Acumatica Request Failed. Going to login again and resend request.</div></div>');
+            echo('<div class="alert alert-danger"><div class="container"><span class="glyphicon glyphicon-remove"></span> Acumatica Request Failed. Going to login again and resend request.</div></div>');
             $this->login();
-            echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Sending an a request: ' . $request . '</div></div>');
+            echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-transfer"></span> Sending a request: ' . $request . '</div></div>');
             $response = parent::__call($request, $data);
             echo('<div class="alert alert-success"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Request success: ' . $request . '</div></div>');
             return $response;
