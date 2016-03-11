@@ -37,68 +37,25 @@ class ContactRepository {
 
     public function all()
     {
-        $name     = env('SOAP_USERNAME');
-        $password = env('SOAP_PASSWORD');
-        $service  = env('SOAP_SERVICE_NAME');
-        $url      = env('SOAP_WSDL_LOCATION');
+        $client = $this->login();
 
-        include('AcumaticaWSDL.php');
+        $commands = array_values($this->fields);
 
-        try
-        {
-            $client = new Screen($url, array('exceptions'=>true, 'trace'=>1, 'encoding' => 'UTF-8'));
-            $login = new Login();
-            $login->name = $name;
-            $login->password = $password;
-            $client->Login($login);
-        }
-        catch (Exception $e)
-        {
-            echo $e->getMessage();
-        }
-
-        $export = new CR302000export();
-
-        $export->commands = [
-            $this->fields['id'],
-            $this->fields['firstName'],
-            $this->fields['lastName'],
-            $this->fields['email'],
-        ];
-
-        $export->filters = [
-            [
-                'OpenBrackets' => 1,
-                'Field' => 'Email',
-                'Condition' => 'NotEqual',
-                'Value' => '',
-                'CloseBrackets' => 1,
-                'Operator' => 'And'
-            ],
-        ];
-
-        $export->topCount = 0;
-        $export->includeHeaders = false;
-        $export->breakOnError = false;
-
-        try
-        {
-            $submit_result = $client->CR302000Export($export);
-        }
-        catch(Exception $e)
-        {
-            print_r($e);
-        }
+        $results = $client->CR302000Export([
+            'commands' => $commands,
+            'topCount' => 0,
+            'includeHeaders' => false,
+            'breakOnError' => false,
+        ])->ExportResult->ArrayOfString;
 
         $contacts = [];
-        foreach($submit_result->ExportResult->ArrayOfString as $item) {
-            $data['id']        =  $item->string[0];
-            $data['firstName'] =  $item->string[1];
-            $data['lastName']  =  $item->string[2];
-            $data['email']     =  $item->string[3];
+        foreach($results as $contact) {
+            $data['id']        =  $contact->string[0];
+            $data['firstName'] =  $contact->string[1];
+            $data['lastName']  =  $contact->string[2];
+            $data['email']     =  $contact->string[3];
 
-            $contact = new Contact($data);
-            array_push($contacts, $contact);
+            array_push($contacts, new Contact($data));
         }
 
         return $contacts;
@@ -168,5 +125,23 @@ class ContactRepository {
     public function destroy($id)
     {
         dd('contact destroy');
+    }
+
+    private function login()
+    {
+        $name     = env('SOAP_USERNAME');
+        $password = env('SOAP_PASSWORD');
+        $service  = env('SOAP_SERVICE_NAME');
+        $url      = env('SOAP_WSDL_LOCATION');
+
+        $client = new \SoapClient($url);
+        $login = [
+            'name' => $name,
+            'password' => $password,
+        ];
+
+        $client->Login($login);
+
+        return $client;
     }
 }

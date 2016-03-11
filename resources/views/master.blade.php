@@ -15,11 +15,10 @@
     <body>
         <div class="container">
             <h2> Soap test </h2>
-            <div class="btn-group">
-                <a class="btn btn-default" href='/'>home</a>
-                <a class="btn btn-default" href='{{ route("contact.index") }}'>contact.index</a>
-                <a class="btn btn-default" href='{{ route("contact.actions") }}'>contact.actions</a>
-            </div>
+            <ul class="nav nav-tabs">
+                <li><a href='/'>home</a></li>
+                <li><a href='{{ route("contact.index") }}'>contact.index</a></li>
+            </ul>
         </div>
         <div class="container app-content">
             @yield('content')
