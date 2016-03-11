@@ -34,11 +34,13 @@ class AcumaticaClient extends SoapClient
 
     function __call($request, $data)
     {
+        $startTime = microtime(true);
         echo('<div class="alert alert-warning"><div class="container"><span class="glyphicon glyphicon-transfer"></span> Sending a request: ' . $request . '</div></div>');
 
         try {
             $response = parent::__call($request, $data);
-            echo('<div class="alert alert-success"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Request success: ' . $request . '</div></div>');
+            $elapsedTime = round(microtime(true) - $startTime, 3);
+            echo('<div class="alert alert-success"><div class="container"><span class="glyphicon glyphicon-ok-circle"></span> Request success: ' . $request . '<br><span class="glyphicon glyphicon-time"></span> Elapsed Time: ' . $elapsedTime . 's</div></div>');
             return $response;
         } catch (\SoapFault $e) {
             echo('<div class="alert alert-danger"><div class="container"><span class="glyphicon glyphicon-remove"></span> Acumatica Request Failed. Going to login again and resend request.</div></div>');
