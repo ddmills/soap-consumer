@@ -11,6 +11,7 @@
                     <th>ID</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -19,6 +20,11 @@
                         <td>{{ $contact->id }}</td>
                         <td>{{ $contact->name }}</td>
                         <td>{{ $contact->email }}</td>
+                        <td>
+                            <a href="{{ route('contact.show', $contact->id) }}" class="btn btn-default btn-xs">
+                                Details
+                            </a>
+                        </td>
                     </tr>
                 @empty
                     <tr>
