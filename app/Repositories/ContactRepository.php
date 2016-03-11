@@ -111,98 +111,52 @@ class ContactRepository {
         $service  = env('SOAP_SERVICE_NAME');
         $url      = env('SOAP_WSDL_LOCATION');
 
-        include('AcumaticaWSDL.php');
+        $client = new \SoapClient($url);
+        $login = [
+            'name' => $name,
+            'password' => $password,
+        ];
 
-        try
-        {
-            $client = new Screen($url, array('exceptions'=>true, 'trace'=>1, 'encoding' => 'UTF-8'));
-            $login = new Login();
-            $login->name = $name;
-            $login->password = $password;
-            $client->Login($login);
-        }
-        catch (Exception $e)
-        {
-            echo $e->getMessage();
-        }
+        $client->Login($login);
+        $schema = $client->CR302000GetSchema([]);
 
-        $export = new CR302000export();
-
-        $export->commands = [
+        $commands = [
             $this->fields['id'],
             $this->fields['firstName'],
             $this->fields['lastName'],
-            $this->fields['email'],
+            $this->fields['email']
         ];
 
-        // dd($client->CR302000GetSchema(new CR302000GetSchema));
+        $filters = [];
 
-        //
-        // $descriptor = new ElementDescriptor;
-        // $descriptor->ElementType = 'string';
-        //
-        // $value = new Value;
-        // $value->FieldName = 'ContactId';
-        // $value->Value = $id;
-        // $value->Descriptor = $descriptor;
-        // $value->LinkedCommand = 'ContactId';
-
-        // $soapvar = new \SoapVar($value, SOAP_ENC_OBJECT, "value", "http://www.w3.org/2001/XMLSchema");
-        // $soapvar = new \SoapVar($id, XSD_STRING, "string", "http://www.w3.org/2001/XMLSchema");
-
-        // dd($soapvar);
-
-        $descriptor = new ElementDescriptor;
-        $descriptor->ElementType = ElementTypes::StringSelector;
-
-        $field = [
-            'FieldName' => 'ContactId',
-            'ObjectName' => 'Contact',
-            'Value' => 'ContactID',
-            'Descriptor' => $descriptor,
+        $filters[] = [
+            'Field' => [
+                'FieldName' => 'ContactId',
+                'ObjectName' => 'Contact',
+            ],
+            'Condition' => "Equals",
+            'Value' => new \SoapVar($id, XSD_STRING, 'string', 'http://www.w3.org/2001/XMLSchema'),
+            'OpenBrackets' => 0,
+            'CloseBrackets' => 0,
+            'Operator' => "And"
         ];
 
+        $results = $client->CR302000Export([
+            'commands' => $commands,
+            'filters' => $filters,
+            'topCount' => 1,
+            'includeHeaders' => false,
+            'breakOnError' => false,
+        ])->ExportResult->ArrayOfString->string;
 
-        $filter = new Filter;
-        $filter->Field = $field;
-        $filter->Condition = FilterCondition::Equals;
-        $filter->Value = $id;
-        $filter->OpenBrackets = 1;
-        $filter->CloseBrackets = 1;
-        $filter->Operator = FilterOperator::_And;
+        $data = [
+            'id' => $results[0],
+            'firstName' => $results[1],
+            'lastName' => $results[2],
+            'email' => $results[3],
+        ];
 
-        // dd($filter);
-
-        $export->filters = [$filter];
-
-
-        $export->topCount = 4;
-        $export->includeHeaders = false;
-        $export->breakOnError = false;
-
-        try
-        {
-            $submit_result = $client->CR302000Export($export);
-        }
-        catch(Exception $e)
-        {
-            print_r($e);
-        }
-
-        $contacts = [];
-        foreach($submit_result->ExportResult->ArrayOfString as $item) {
-            $data['id']        =  $item->string[0];
-            $data['firstName'] =  $item->string[1];
-            $data['lastName']  =  $item->string[2];
-            $data['email']     =  $item->string[3];
-
-            $contact = new Contact($data);
-            array_push($contacts, $contact);
-        }
-
-        dd($contacts);
-
-        return $contacts;
+        return new Contact($data);
     }
 
     public function create(array $data)
