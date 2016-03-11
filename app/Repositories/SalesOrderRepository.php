@@ -3,11 +3,16 @@
 namespace App\Repositories;
 
 use App\SalesOrder;
+use App\Acumatica\AcumaticaClient;
 
-class SalesOrderRepository {
+class SalesOrderRepository
+{
 
-    public function __construct()
+    private $acumaticaClient;
+
+    public function __construct(AcumaticaClient $acumaticaClient)
     {
+        $this->acumaticaClient = $acumaticaClient;
     }
 
     protected $fields = [
@@ -30,14 +35,9 @@ class SalesOrderRepository {
 
     public function all()
     {
-        $client = $this->login();
-
-
-        //dd($client->SO301000GetSchema());
-
         $commands = array_values($this->fields);
 
-        $results = $client->SO301000Export([
+        $results = $this->acumaticaClient->SO301000Export([
             'commands' => $commands,
             'topCount' => 0,
             'includeHeaders' => false,
@@ -58,8 +58,6 @@ class SalesOrderRepository {
 
     public function find($orderNumber)
     {
-        $client = $this->login();
-
         $commands = array_values($this->fields);
 
         $filters = [];
@@ -75,7 +73,7 @@ class SalesOrderRepository {
             'Operator' => "And"
         ];
 
-        $salesOrder = $client->SO301000Export([
+        $salesOrder = $this->acumaticaClient->SO301000Export([
             'commands' => $commands,
             'filters' => $filters,
             'topCount' => 1,
@@ -100,24 +98,6 @@ class SalesOrderRepository {
     public function destroy($id)
     {
         dd('salesOrder destroy');
-    }
-
-    private function login()
-    {
-        $name     = env('SOAP_USERNAME');
-        $password = env('SOAP_PASSWORD');
-        $service  = env('SOAP_SERVICE_NAME');
-        $url      = env('SOAP_WSDL_LOCATION');
-
-        $client = new \SoapClient($url);
-        $login = [
-            'name' => $name,
-            'password' => $password,
-        ];
-
-        $client->Login($login);
-
-        return $client;
     }
 
 }
