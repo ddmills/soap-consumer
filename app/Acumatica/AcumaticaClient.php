@@ -14,7 +14,7 @@ class AcumaticaClient extends SoapClient
     public function __construct()
     {
         parent::__construct(config('acumatica.wsdl'), [
-            'cache_wsdl' => WSDL_CACHE_NONE,
+            'cache_wsdl' => WSDL_CACHE_MEMORY,
             'exceptions' => true,
         ]);
         $this->setup();

@@ -87,13 +87,19 @@ class ContactRepository
             'Operator' => "And"
         ];
 
-        $results = $this->acumaticaClient->CR302000Export([
+        $response = $this->acumaticaClient->CR302000Export([
             'commands' => $commands,
             'filters' => $filters,
             'topCount' => 1,
             'includeHeaders' => false,
             'breakOnError' => false,
-        ])->ExportResult->ArrayOfString->string;
+        ])->ExportResult;
+
+        if (property_exists($response, 'ArrayOfString') > 0) {
+            $results = $response->ArrayOfString->string;
+        } else {
+            abort(404);
+        }
 
         $data = [
             'id' => $results[0],
