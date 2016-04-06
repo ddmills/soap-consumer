@@ -4,51 +4,9 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "8c40d5c3826f38301f6222173d47040a",
-    "content-hash": "e5ec10e10dafd086b3cea5aa1b062471",
+    "hash": "881197e67a7d35370bd5f5890705ec96",
+    "content-hash": "3fde0ae24b446c8203790a694ebd7c44",
     "packages": [
-        {
-            "name": "artisaninweb/laravel-soap",
-            "version": "0.2.5.10",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/artisaninweb/laravel-soap.git",
-                "reference": "a25956372fdc095a2206a5cacf76d12b1b11c084"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/artisaninweb/laravel-soap/zipball/a25956372fdc095a2206a5cacf76d12b1b11c084",
-                "reference": "a25956372fdc095a2206a5cacf76d12b1b11c084",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.4.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "Artisaninweb\\SoapWrapper": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Michael van de Rijt",
-                    "email": "me@mvdrijt.com"
-                }
-            ],
-            "description": "A SoapClient wrapper integration for Laravel",
-            "keywords": [
-                "client",
-                "laravel",
-                "soap",
-                "wrapper"
-            ],
-            "time": "2015-06-17 11:22:29"
-        },
         {
             "name": "classpreloader/classpreloader",
             "version": "3.0.0",
@@ -1820,6 +1778,48 @@
     ],
     "packages-dev": [
         {
+            "name": "artisaninweb/laravel-soap",
+            "version": "0.2.5.10",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/artisaninweb/laravel-soap.git",
+                "reference": "a25956372fdc095a2206a5cacf76d12b1b11c084"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/artisaninweb/laravel-soap/zipball/a25956372fdc095a2206a5cacf76d12b1b11c084",
+                "reference": "a25956372fdc095a2206a5cacf76d12b1b11c084",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Artisaninweb\\SoapWrapper": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Michael van de Rijt",
+                    "email": "me@mvdrijt.com"
+                }
+            ],
+            "description": "A SoapClient wrapper integration for Laravel",
+            "keywords": [
+                "client",
+                "laravel",
+                "soap",
+                "wrapper"
+            ],
+            "time": "2015-06-17 11:22:29"
+        },
+        {
             "name": "doctrine/instantiator",
             "version": "1.0.5",
             "source": {
@@ -3041,6 +3041,60 @@
             "time": "2016-01-25 09:56:57"
         },
         {
+            "name": "symfony/options-resolver",
+            "version": "v2.8.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/options-resolver.git",
+                "reference": "496d650b0137e57c2920eb14f9d366ff506761a8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/options-resolver/zipball/496d650b0137e57c2920eb14f9d366ff506761a8",
+                "reference": "496d650b0137e57c2920eb14f9d366ff506761a8",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.8-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Symfony\\Component\\OptionsResolver\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Fabien Potencier",
+                    "email": "fabien@symfony.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony OptionsResolver Component",
+            "homepage": "https://symfony.com",
+            "keywords": [
+                "config",
+                "configuration",
+                "options"
+            ],
+            "time": "2016-03-04 07:54:35"
+        },
+        {
             "name": "symfony/yaml",
             "version": "v3.0.2",
             "source": {
@@ -3088,6 +3142,54 @@
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
             "time": "2016-02-02 13:44:19"
+        },
+        {
+            "name": "wsdl2phpgenerator/wsdl2phpgenerator",
+            "version": "3.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/wsdl2phpgenerator/wsdl2phpgenerator.git",
+                "reference": "eb1396555e11cc2cda899514f439efae7dd498c1"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/wsdl2phpgenerator/wsdl2phpgenerator/zipball/eb1396555e11cc2cda899514f439efae7dd498c1",
+                "reference": "eb1396555e11cc2cda899514f439efae7dd498c1",
+                "shasum": ""
+            },
+            "require": {
+                "ext-soap": "*",
+                "php": ">=5.3.0",
+                "symfony/options-resolver": "~2.6"
+            },
+            "require-dev": {
+                "kasperg/phing-github": "0.2.*",
+                "phing/phing": "~2.7",
+                "php-vcr/php-vcr": "~1.2",
+                "php-vcr/phpunit-testlistener-vcr": "~1.1.2",
+                "phpunit/phpunit": "~4.4",
+                "psr/log": "~1.0",
+                "symfony/yaml": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Wsdl2PhpGenerator\\": [
+                        "src/",
+                        "lib/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Simple class library for generating php classes from a wsdl file.",
+            "keywords": [
+                "soap",
+                "wsdl"
+            ],
+            "time": "2016-01-13 13:00:24"
         }
     ],
     "aliases": [],

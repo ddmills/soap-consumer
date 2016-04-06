@@ -16,6 +16,7 @@ class AcumaticaClient extends SoapClient
         parent::__construct(config('acumatica.wsdl'), [
             'cache_wsdl' => WSDL_CACHE_MEMORY,
             'exceptions' => true,
+            'trace' => true
         ]);
         $this->setup();
     }
@@ -64,7 +65,7 @@ class AcumaticaClient extends SoapClient
 
         Cache::put('acumatica.cookies', $this->_cookies, 10);
 
-        return $response->LoginResult;
+        return $response;
     }
 
 }
